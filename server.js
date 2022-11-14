@@ -8,9 +8,9 @@ server.use(express.json());
 let cors = require("cors")
 server.use(cors())
 
-const mongoString = process.env.MONGODB_URI
+// const mongoString = process.env.MONGODB_URI
 
-mongoose.connect(mongoString)
+mongoose.connect('mongodb+srv://admin:gBKAMaSoHndIzC1R@cluster0.0y9hxp2.mongodb.net/test')
 
 const db = mongoose.connection
 db.on("error", console.error.bind(console, "connection error: "));
