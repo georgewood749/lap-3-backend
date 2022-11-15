@@ -1,5 +1,10 @@
 const { init } = require ('../dbConfig');
 
+const ranAvt = () => {
+    const ranNum = Math.floor(Math.random() * 53);
+    return `https://xsgames.co/randomusers/assets/avatars/pixel/${ranNum}.jpg`;
+}
+
 class Game {
     constructor(data){
         this.id = data.id   // "_id"
