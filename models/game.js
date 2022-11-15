@@ -3,6 +3,8 @@ const { init } = require ('../dbConfig');
 class Game {
     constructor(data){
         this.id = data.id   // "_id"
+        //todo settingCoef
+        //todo trivia api to agtk api
         this.settings = data.settings
         this.contents = data.contents
         this.players = data.players

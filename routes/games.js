@@ -4,4 +4,6 @@ const gamesController = require("../controllers/games");
 
 router.route("/").get(gamesController.getAllGames);
 
+//todo getGameByID
+
 module.exports = router;

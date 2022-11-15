@@ -21,6 +21,20 @@ class User {
             }
         })
     }
+
+    static sortByScore(){
+        return new Promise (async (resolve, reject) => {
+            try {
+                const db = await init();
+                const usersData = await db.collection('users').find().sort({"scores":-1}).toArray()
+                const users = usersData.map(d => new User({ ...d, id: d._id }))
+                resolve(users);
+            } catch (err) {
+                console.log(err);
+                reject("Error retrieving users (leaderboard)")
+            }
+        })
+    }
 }
 
 module.exports = User;

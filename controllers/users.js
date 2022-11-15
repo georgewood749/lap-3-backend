@@ -4,9 +4,18 @@ const getAllUsers = async (req, res) => {
 	try {
 		const users = await User.all;
 		res.status(200).json({ users });
-	} catch (error) {
-		res.status(500).json({ msg: error.message });
+	} catch (err) {
+		res.status(500).json({ msg: err.message });
 	}
 };
 
-module.exports = { getAllUsers };
+const leaderboard = async (req, res) => {
+	try {
+		const users = await User.sortByScore();
+		res.status(200).json({ users });
+	} catch (err) {
+		res.status(500).json({ msg: err.message });
+	}
+}
+
+module.exports = { getAllUsers, leaderboard };
