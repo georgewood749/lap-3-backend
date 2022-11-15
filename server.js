@@ -1,16 +1,38 @@
 const express = require('express');
 const cors = require("cors");
 
-const server = express();
-server.use(cors());
-server.use(express.json());
+const app = express();
+const http = require("http");
+const { Server } = require("socket.io")
+
+app.use(cors());
+app.use(express.json());
+
+const server = http.createServer(app);
+
+
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        method: ["GET", "POST"]
+    }
+})
+
+io.on("connection", (socket) => {
+    console.log("User Connected: ", socket.id)
+
+
+    socket.on("disconnect", () => {
+        console.log("User Disconnected", socket.id)
+    })
+})
 
 
 //* Routes
-server.use('/users', require('./routes/users'));
-server.use('/games', require('./routes/games'));
+app.use('/users', require('./routes/users'));
+app.use('/games', require('./routes/games'));
 
-server.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Welcome to our AGTK API!')
 })
 
