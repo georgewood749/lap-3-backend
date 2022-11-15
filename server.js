@@ -5,7 +5,6 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-
 //* Routes
 server.use('/users', require('./routes/users'));
 server.use('/games', require('./routes/games'));
