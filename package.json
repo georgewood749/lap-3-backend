@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node seed.js && nodemon index.js"
+    "dev": "nodemon -L test.js",
   },
   "repository": {
     "type": "git",
