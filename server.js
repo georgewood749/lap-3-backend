@@ -1,26 +1,16 @@
-const express = require('express')
-const mongoose = require('mongoose');
-require('dotenv').config();
+const express = require('express');
+const cors = require("cors");
 
-const server = express()
+const server = express();
+server.use(cors());
 server.use(express.json());
 
-let cors = require("cors")
-server.use(cors())
-
-// const mongoString = process.env.MONGODB_URI
-
-mongoose.connect('mongodb+srv://admin:gBKAMaSoHndIzC1R@cluster0.0y9hxp2.mongodb.net/test')
-
-const db = mongoose.connection
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", () => console.log("Connected successfully to database"));
-
-const routes = require('./routes/routes');
-server.use('/api', routes);
+//* Routes
+server.use('/users', require('./routes/users'));
+server.use('/games', require('./routes/games'));
 
 server.get('/', (req, res) => {
-    res.send('Welcome to our quiz database!')
+    res.send('Welcome to our AGTK API!')
 })
 
-module.exports = { server, db }
+module.exports = { server }
