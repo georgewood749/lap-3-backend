@@ -1,13 +1,12 @@
 require('dotenv').config();
-const DB_URI = process.env.DB_CONNECTION;
-const dbName = process.env.DB_NAME
+const db_uri = process.env.DB_CONNECTION;
+const db_name = process.env.DB_NAME;
 
-const {server} = require('./server');
-const port = process.env.PORT || 3000
+const { server } = require('./server');
 
-server.listen(port, () => {
-    console.log(`Server listening on port ${port}`)
-})
+const port = process.env.PORT || 5000;
 
-global.DB_URI = DB_URI;
-global.dbName = dbName;
+server.listen(port, () => console.log(`listening on http://localhost:${port}/`));
+
+global.db_uri = db_uri
+global.db_name = db_name

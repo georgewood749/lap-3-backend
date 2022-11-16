@@ -9,6 +9,15 @@ const getAllUsers = async (req, res) => {
 	}
 };
 
+const postUser = async (req, res) => {
+	try {
+		const users = await User.create(req.body.username, req.body.avatar_url, req.body.scores);
+		res.status(201).json(users);
+	} catch (err) {
+		res.status(400).json({ msg: err.message });
+	}
+};
+
 const leaderboard = async (req, res) => {
 	try {
 		const users = await User.sortByScore();
@@ -18,4 +27,4 @@ const leaderboard = async (req, res) => {
 	}
 }
 
-module.exports = { getAllUsers, leaderboard };
+module.exports = { getAllUsers, postUser, leaderboard };
