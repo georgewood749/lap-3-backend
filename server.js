@@ -1,16 +1,21 @@
 const express = require('express');
-const cors = require("cors");
+const { app, io, server } = require('./config/serverConfig');
+const cors = require('cors');
 
-const server = express();
-server.use(cors());
-server.use(express.json());
+const { init } = require('./config/socketConfig');
+
+const bodyParser = require("body-parser")
+app.use(bodyParser.json())
+
+//* Server
+
+app.use(cors());
+app.use(express.json());
 
 //* Routes
-server.use('/users', require('./routes/users'));
-server.use('/games', require('./routes/games'));
+app.use('/users', require('./routes/users'));
 
-server.get('/', (req, res) => {
-    res.send('Welcome to our AGTK API!')
-})
+//* Initialise socket connection
+io.on("connection", socket => init(socket));
 
-module.exports = { server }
+module.exports = { server };
