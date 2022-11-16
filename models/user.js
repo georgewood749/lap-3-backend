@@ -1,10 +1,17 @@
 const { init } = require('../config/dbConfig')
 
+const ranAvt = () => {
+    const ranNum = Math.floor(Math.random() * 53);
+    return `https://xsgames.co/randomusers/assets/avatars/pixel/${ranNum}.jpg`;
+}
+
+
 class User {
     constructor(data){
         this.id = data.id
+        this.socketID = data.socketID
         this.username = data.username
-        this.avatar_url = data.avatar_url
+        this.avatar_url = ranAvt()
         this.scores = data.scores
     }
 
