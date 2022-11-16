@@ -22,7 +22,7 @@ class User {
         })
     }
 
-    static create(username, scores, avatar_url){
+    static create(username, avatar_url, scores){
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
