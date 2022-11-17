@@ -9,9 +9,8 @@ const ranAvt = () => {
 class User {
     constructor(data){
         this.id = data.id
-        this.socketID = data.socketID
         this.username = data.username
-        this.avatar_url = ranAvt()
+        this.avatar_url = data.avatar_url
         this.scores = data.scores
     }
 
@@ -29,11 +28,11 @@ class User {
         })
     }
 
-    static create(username, avatar_url, scores){
+    static create(username, scores){
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
-                const usersData = await db.collection('users').insertOne({ username, avatar_url, scores})
+                const usersData = await db.collection('users').insertOne({ username, avatar_url: ranAvt(), scores})
                 const newUserData = await db.collection('users').find({_id:{$eq: usersData.insertedId}}).toArray()
                 const newUser = new User(newUserData[0]);
                 resolve (newUser);
