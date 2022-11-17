@@ -8,9 +8,12 @@ function init(socket) {
     socket.on('join-room', (room, username) => {
         socket.join(room)
 
+        //* Total number of sockets in the 'room'
         const nPlayers = io.of("/").adapter.rooms.get(room).size;
+        //* Full list of sockets in the 'room'
         const playersID = Array.from(io.of("/").adapter.rooms.get(room));
-
+        
+        console.log(`room ${room} has ${playersID}, ${nPlayers} in total`);
         io.to(room).emit('update-room', room, playersID)
 
     });

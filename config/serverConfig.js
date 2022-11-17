@@ -6,7 +6,7 @@ const { instrument } = require('@socket.io/admin-ui')
 
 const io = require("socket.io")(server, {
     cors: {
-        origin: ['http://localhost:3000', 'https://admin.socket.io', 'https://agtk-quiz.netlify.app/'],
+        origin: ['https://admin.socket.io', 'https://agtk-quiz.netlify.app'],
         methods: ["GET", "POST"],
         credentials: true,
     }
