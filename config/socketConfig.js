@@ -1,13 +1,9 @@
 const { io } = require('./serverConfig');
 const User = require('../models/user');
 const Game = require('../models/game');
-// const { emit } = require('nodemon');
 
 function init(socket) {
     console.log(`User \"${socket.id}\" is mounted`);
-
-
-
 
     socket.on('join-room', (room, username) => {
         socket.join(room)
