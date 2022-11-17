@@ -11,7 +11,7 @@ const getAllUsers = async (req, res) => {
 
 const postUser = async (req, res) => {
 	try {
-		const users = await User.create(req.body.username, req.body.avatar_url, req.body.scores);
+		const users = await User.create(req.body.username, req.body.scores);
 		res.status(201).json(users);
 	} catch (err) {
 		res.status(400).json({ msg: err.message });

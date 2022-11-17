@@ -1,5 +1,11 @@
 const { init } = require('../config/dbConfig')
 
+const ranAvt = () => {
+    const ranNum = Math.floor(Math.random() * 53);
+    return `https://xsgames.co/randomusers/assets/avatars/pixel/${ranNum}.jpg`;
+}
+
+
 class User {
     constructor(data){
         this.id = data.id
@@ -22,11 +28,11 @@ class User {
         })
     }
 
-    static create(username, avatar_url, scores){
+    static create(username, scores){
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
-                const usersData = await db.collection('users').insertOne({ username, avatar_url, scores})
+                const usersData = await db.collection('users').insertOne({ username, avatar_url: ranAvt(), scores})
                 const newUserData = await db.collection('users').find({_id:{$eq: usersData.insertedId}}).toArray()
                 const newUser = new User(newUserData[0]);
                 resolve (newUser);
