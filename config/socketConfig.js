@@ -53,7 +53,7 @@ function init(socket) {
             })). then( game => { cb(game) })
     });
 
-    socket.on('start-game', (room, qa) => {
+    socket.on('start-game', ( room, qa ) => {
         console.log("got it", room);
         io.to(room).emit('teleport-players', qa)
 
@@ -64,9 +64,9 @@ function init(socket) {
     socket.on('disconnecting', () => {
         Array.from(socket.rooms).forEach(
             room => {
-                let playersID = Array.from(io.of("/").adapter.rooms.get(room)).filter(p => p == socket.id)
-                io.to(room).emit('update-room', room, playersID)
+                let playersID = Array.from(io.of("/").adapter.rooms.get(room)).filter(p => p !== socket.id)
                 console.log(room, playersID);
+                io.to(room).emit('update-room', room, playersID)
             }
         )
     })
